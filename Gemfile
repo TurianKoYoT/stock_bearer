@@ -50,6 +50,9 @@ group :development, :test do
 
   # A library for setting up Ruby objects as test data
   gem 'factory_bot_rails'
+
+  # ActiveRecord plugin allowing you to hide and restore records without actually deleting them.
+  gem 'acts_as_paranoid'
 end
 
 group :development do
