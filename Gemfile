@@ -47,6 +47,9 @@ group :development, :test do
 
   # Testing library
   gem 'rspec-rails'
+
+  # A library for setting up Ruby objects as test data
+  gem 'factory_bot_rails'
 end
 
 group :development do
