@@ -53,6 +53,8 @@ group :development, :test do
 
   # ActiveRecord plugin allowing you to hide and restore records without actually deleting them.
   gem 'acts_as_paranoid'
+
+  gem 'dry-schema'
 end
 
 group :development do
