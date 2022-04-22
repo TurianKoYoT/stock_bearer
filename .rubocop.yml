@@ -6,3 +6,6 @@ require:
 
 Style/Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context', 'let']
