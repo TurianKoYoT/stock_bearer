@@ -33,3 +33,6 @@
 /config/master.key
 
 .idea/
+
+stock_bearer_dev
+stock_bearer_test
