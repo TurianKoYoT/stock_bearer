@@ -198,7 +198,7 @@ RSpec.describe 'Stocks', type: :request do
     end
   end
 
-  describe 'PATCH /stocks' do
+  describe 'PATCH /stocks/{:id}' do
     subject(:make_request) { patch "/stocks/#{stock.id}", params: params.to_json, headers: json_headers }
 
     let!(:stock) { create(:stock) }

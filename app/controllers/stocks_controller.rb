@@ -16,7 +16,7 @@ class StocksController < ApplicationController
   end
 
   def update
-    service = Api::V1::StockUpdateService.call(id: params.require(:stock).permit(:id)[:id], **update_params)
+    service = Api::V1::StockUpdateService.call(id: update_id, **update_params)
 
     if service.success?
       render jsonapi: service.result, include: [:bearer]
@@ -29,6 +29,10 @@ class StocksController < ApplicationController
 
   def create_params
     params.require(:stock).permit(:name, :bearer_id)
+  end
+
+  def update_id
+    params.require(:_jsonapi).require(:data)[:id]
   end
 
   def update_params
