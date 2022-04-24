@@ -31,7 +31,7 @@ class StocksController < ApplicationController
     if service.success?
       render status: :no_content
     else
-      render jsonapi_errors: service.errors.to_json
+      render jsonapi_errors: service.errors.to_json, status: :not_found
     end
   end
 
