@@ -9,3 +9,9 @@ Style/Documentation:
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context', 'let']
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never

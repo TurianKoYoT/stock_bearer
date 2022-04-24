@@ -23,7 +23,7 @@ class ApplicationService
   end
 
   def call
-    process
+    process if success?
 
     self
   end
@@ -35,7 +35,7 @@ class ApplicationService
   def initialize_by_schema(params)
     result = schema.call(params)
 
-    errors.merge!(result.errors) unless result.success?
+    errors.merge!(result.errors.to_h) if result.failure?
 
     initialize_instance_variables(result)
   end
