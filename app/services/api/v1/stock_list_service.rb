@@ -1,6 +1,6 @@
 module Api
   module V1
-    class StockListService < ApplicationService
+    class StockListService < ::Api::ApplicationService
       attr_reader :result
 
       def process

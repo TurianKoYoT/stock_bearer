@@ -11,7 +11,7 @@ class StocksController < ApplicationController
     if service.success?
       render jsonapi: service.result, include: [:bearer]
     else
-      render jsonapi_errors: [{ title: 'Task already has completed submission.' }]
+      render jsonapi_errors: service.errors.to_json
     end
   end
 

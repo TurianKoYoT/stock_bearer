@@ -144,7 +144,52 @@ RSpec.describe 'Stocks', type: :request do
         }
       end
 
-      let(:expected_response) { {}.to_json }
+      let(:expected_response) do
+        {
+          errors: [
+            {
+              source: { pointer: '/data/attributes/bearer_id' },
+              title: 'is missing'
+            }
+          ],
+          jsonapi: {
+            version: '1.0'
+          }
+        }.to_json
+      end
+
+      it 'returns errors' do
+        make_request
+        expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
+      end
+    end
+
+    context 'with bearer not existing' do
+      let(:params) do
+        {
+          data: {
+            type: 'stocks',
+            attributes: {
+              name: 'Stock api name',
+              bearer_id: 999999.to_s
+            }
+          }
+        }
+      end
+
+      let(:expected_response) do
+        {
+          errors: [
+            {
+              source: { pointer: '/data/attributes/bearer' },
+              title: 'must exist'
+            }
+          ],
+          jsonapi: {
+            version: '1.0'
+          }
+        }.to_json
+      end
 
       it 'returns errors' do
         make_request

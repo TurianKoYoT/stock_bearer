@@ -19,7 +19,11 @@ class ApplicationService
   end
 
   def errors
-    @errors ||= ErrorsSet.new
+    @errors ||= error_set_class.new
+  end
+
+  def error_set_class
+    ErrorsSet
   end
 
   def call

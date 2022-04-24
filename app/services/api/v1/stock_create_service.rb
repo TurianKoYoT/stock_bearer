@@ -1,6 +1,6 @@
 module Api
   module V1
-    class StockCreateService < ApplicationService
+    class StockCreateService < Api::ApplicationService
       attr_reader :result
 
       params do
