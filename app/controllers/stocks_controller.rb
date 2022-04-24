@@ -25,6 +25,16 @@ class StocksController < ApplicationController
     end
   end
 
+  def destroy
+    service = Api::V1::StockDeleteService.call(id: params[:id])
+
+    if service.success?
+      render status: :no_content
+    else
+      render jsonapi_errors: service.errors.to_json
+    end
+  end
+
   private
 
   def create_params

@@ -316,4 +316,15 @@ RSpec.describe 'Stocks', type: :request do
       end
     end
   end
+
+  describe 'DELETE /stocks/{:id}' do
+    subject(:make_request) { delete "/stocks/#{stock.id}", headers: json_headers }
+
+    let!(:stock) { create(:stock) }
+
+    it 'soft_deletes stock' do
+      make_request
+      expect(stock.reload).to be_deleted
+    end
+  end
 end
