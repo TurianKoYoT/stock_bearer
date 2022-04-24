@@ -1,6 +1,6 @@
 class ErrorsSet
   class Api < ::ErrorsSet
-    def to_json
+    def to_json(*_args)
       errors.map do |error_key, error_values|
         error_values.map do |error_value|
           {

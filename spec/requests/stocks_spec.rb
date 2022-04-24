@@ -225,7 +225,7 @@ RSpec.describe 'Stocks', type: :request do
           type: 'stocks',
           id: stock.id.to_s,
           attributes: {
-            name: 'Stock api name',
+            name: 'Stock api name'
           }
         }
       }
