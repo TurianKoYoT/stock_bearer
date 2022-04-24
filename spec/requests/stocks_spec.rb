@@ -231,48 +231,12 @@ RSpec.describe 'Stocks', type: :request do
       }
     end
 
-    let(:expected_response) do
-      {
-        data:
-          {
-            type: 'stocks',
-            id: stock.id.to_s,
-            attributes: {
-              name: 'Stock api name'
-            },
-            relationships: {
-              bearer: {
-                data: {
-                  type: 'bearers',
-                  id: stock.bearer_id.to_s
-                }
-              }
-            }
-          },
-        included: [
-          {
-            type: 'bearers',
-            id: stock.bearer_id.to_s,
-            attributes: {
-              name: stock.bearer.name
-            }
-          }
-        ],
-        jsonapi: {
-          version: '1.0'
-        }
-      }.to_json
-    end
-
     it 'update stock' do
       make_request
       expect(Stock.last).to have_attributes(name: 'Stock api name')
     end
 
-    it 'returns updated object' do
-      make_request
-      expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
-    end
+    it_behaves_like 'responds with status', :no_content
 
     context 'when passed bearer_id' do
       let(:params) do
@@ -293,10 +257,7 @@ RSpec.describe 'Stocks', type: :request do
         expect(Stock.last).to have_attributes(name: 'Stock api name', bearer_id: initial_bearer_id)
       end
 
-      it 'returns updated object' do
-        make_request
-        expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
-      end
+      it_behaves_like 'responds with status', :no_content
     end
 
     context 'when id is not passed in data' do

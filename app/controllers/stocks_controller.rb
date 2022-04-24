@@ -19,7 +19,7 @@ class StocksController < ApplicationController
     service = Api::V1::StockUpdateService.call(id: update_id, **update_params)
 
     if service.success?
-      render jsonapi: service.result, include: [:bearer]
+      render status: :no_content
     else
       render jsonapi_errors: service.errors.to_json, status: :not_found
     end
