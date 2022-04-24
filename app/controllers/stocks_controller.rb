@@ -9,9 +9,9 @@ class StocksController < ApplicationController
     service = Api::V1::StockCreateService.call(**create_params)
 
     if service.success?
-      render jsonapi: service.result, include: [:bearer]
+      render jsonapi: service.result, include: [:bearer], status: :created
     else
-      render jsonapi_errors: service.errors.to_json
+      render jsonapi_errors: service.errors.to_json, status: :not_found
     end
   end
 
@@ -21,7 +21,7 @@ class StocksController < ApplicationController
     if service.success?
       render jsonapi: service.result, include: [:bearer]
     else
-      render jsonapi_errors: service.errors.to_json
+      render jsonapi_errors: service.errors.to_json, status: :not_found
     end
   end
 

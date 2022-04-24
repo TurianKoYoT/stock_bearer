@@ -5,6 +5,13 @@ RSpec.describe 'Stocks', type: :request do
     { 'Content-Type': 'application/vnd.api+json', 'Accept': 'application/vnd.api+json' }
   end
 
+  shared_examples 'responds with status' do |status|
+    it "returns #{status} status" do
+      make_request
+      expect(response).to have_http_status status
+    end
+  end
+
   describe 'GET /stocks' do
     subject(:make_request) { get '/stocks' }
 
@@ -70,6 +77,8 @@ RSpec.describe 'Stocks', type: :request do
       make_request
       expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
     end
+
+    it_behaves_like 'responds with status', :ok
   end
 
   describe 'POST /stocks' do
@@ -132,6 +141,8 @@ RSpec.describe 'Stocks', type: :request do
       expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
     end
 
+    it_behaves_like 'responds with status', :created
+
     context 'with no bearer passed' do
       let(:params) do
         {
@@ -162,6 +173,8 @@ RSpec.describe 'Stocks', type: :request do
         make_request
         expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
       end
+
+      it_behaves_like 'responds with status', :not_found
     end
 
     context 'with bearer not existing' do
@@ -195,6 +208,8 @@ RSpec.describe 'Stocks', type: :request do
         make_request
         expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
       end
+
+      it_behaves_like 'responds with status', :not_found
     end
   end
 
@@ -314,6 +329,8 @@ RSpec.describe 'Stocks', type: :request do
         make_request
         expect(JSON.parse(response.body)).to eq JSON.parse(expected_response)
       end
+
+      it_behaves_like 'responds with status', :not_found
     end
   end
 
@@ -326,5 +343,7 @@ RSpec.describe 'Stocks', type: :request do
       make_request
       expect(stock.reload).to be_deleted
     end
+
+    it_behaves_like 'responds with status', :no_content
   end
 end
